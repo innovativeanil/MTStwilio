@@ -29,7 +29,7 @@ namespace TwilioPOC.Controllers
                 response.Say(string.Format("The status of item {0} is {1}.", item.Id, item.Status));
             }
 
-            response.Redirect("../CallHome");
+            response.Redirect("http://twiliopoc.apphb.com/api/CallHome");
             
             return this.Request.CreateResponse(
                 HttpStatusCode.OK, response.Element, new XmlMediaTypeFormatter());

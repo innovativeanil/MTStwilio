@@ -20,7 +20,7 @@ namespace TwilioPOC.Controllers
         public ActionResult Index(Feedback item)
         {
             DataStore.Instance.ChangeStatus(item.Id, item.Status);
-            return RedirectToAction("Index");
+            return Redirect("Review");
         }
     }
 }
