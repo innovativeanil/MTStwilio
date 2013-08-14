@@ -10,12 +10,13 @@ using Twilio.TwiML;
 
 namespace TwilioPOC.Controllers
 {
-    public class RoutingController : ApiController
+    public class CallCreateController : ApiController
     {
         [HttpPost]
         public HttpResponseMessage Post(VoiceRequest request)
         {
             var response = new TwilioResponse();
+            var Name = request.Digits;
 
             response.Say("You are a little bitch, bitch.");
 

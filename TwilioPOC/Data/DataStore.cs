@@ -63,6 +63,25 @@ namespace TwilioPOC.Data
             }
         }
 
+        public Feedback GetItem(int id)
+        {
+            if (id > dataStore.Count)
+                return null;
+
+            return dataStore[id - 1];
+        }
+
+        public Feedback GetItem(string id)
+        {
+            int intId;
+            var success = Int32.TryParse(id, out intId);
+
+            if (!success)
+                return null;
+
+            return GetItem(intId);
+        }
+
         //public bool Create(Feedback item)
         //{
         //    lock(lockObject)
