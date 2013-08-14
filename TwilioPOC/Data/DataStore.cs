@@ -13,32 +13,64 @@ namespace TwilioPOC.Data
         private const string dataPath = @"\Data\feedbackItems.txt";
 
         private static DataStore instance;
-        private object lockObject = new object();
+        private readonly object lockObject = new object();
         
         public static DataStore Instance { get { return instance ?? (instance = new DataStore()); } }
 
-        public bool Save(Feedback item)
+        public bool Create(Feedback item)
         {
-            var path = HttpContext.Current.Server.MapPath(dataPath);
-            var data = File.ReadAllText(path);
+            lock(lockObject)
+            {
+                var path = HttpContext.Current.Server.MapPath(dataPath);
+                var data = File.ReadAllText(path);
 
-            var feedbackList = JsonConvert.DeserializeObject<List<Feedback>>(data) ?? new List<Feedback>();
-            item.Id = feedbackList.Count + 1;
-            feedbackList.Add(item);
+                var feedbackList = JsonConvert.DeserializeObject<List<Feedback>>(data) ?? new List<Feedback>();
+                item.Id = feedbackList.Count + 1;
+                item.Status = "Open";
+                feedbackList.Add(item);
             
-            var json = JsonConvert.SerializeObject(feedbackList);
-            
-            File.WriteAllText(path, json);
-            
-            return true;
+                var json = JsonConvert.SerializeObject(feedbackList);
+                File.WriteAllText(path, json);
+                return true;
+            }
+        }
+
+        public bool ChangeStatus(int id, string status)
+        {
+            lock (lockObject)
+            {
+                var path = HttpContext.Current.Server.MapPath(dataPath);
+                var data = File.ReadAllText(path);
+
+                // find our item
+                var feedbackList = JsonConvert.DeserializeObject<List<Feedback>>(data) ?? new List<Feedback>();
+                var match = feedbackList.FirstOrDefault(feedback => feedback.Id.Equals(id));
+                
+                if (match == null)
+                {
+                    return false;
+                }
+
+                // update the item
+                match.Status = status;
+                var json = JsonConvert.SerializeObject(feedbackList);
+                File.WriteAllText(path, json);
+
+                // TODO: Notify submitter via text
+
+                return true;
+            }
         }
 
         public Feedback[] GetItems()
         {
-            var path = HttpContext.Current.Server.MapPath(dataPath);
-            var data = File.ReadAllText(path);
-            var feedbackList = JsonConvert.DeserializeObject<List<Feedback>>(data) ?? new List<Feedback>();
-            return feedbackList.ToArray();
+            lock (lockObject)
+            {
+                var path = HttpContext.Current.Server.MapPath(dataPath);
+                var data = File.ReadAllText(path);
+                var feedbackList = JsonConvert.DeserializeObject<List<Feedback>>(data) ?? new List<Feedback>();
+                return feedbackList.ToArray();
+            }
         }
     }
 }

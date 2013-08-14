@@ -1,1 +1,1 @@
-[{"Id":1,"Submitter":"1","Phone":"1","Message":"1"},{"Id":2,"Submitter":"2","Phone":"2","Message":"2"},{"Id":3,"Submitter":"3","Phone":"3","Message":"3"}]
+[{"Submitter":"1","Phone":"1","Message":"1","Id":1,"Status":"Open"},{"Submitter":"2","Phone":"2","Message":"2","Id":2,"Status":null},{"Submitter":"3","Phone":"3","Message":"3","Id":3,"Status":null},{"Submitter":"scott","Phone":"5073041050","Message":"Test","Id":4,"Status":null}]

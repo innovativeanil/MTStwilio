@@ -8,7 +8,7 @@ using TwilioPOC.Models;
 
 namespace TwilioPOC.Controllers
 {
-    public class HomeController : Controller
+    public class EditController : Controller
     {
         [HttpGet]
         public ActionResult Index()
@@ -19,10 +19,7 @@ namespace TwilioPOC.Controllers
         [HttpPost]
         public ActionResult Index(Feedback item)
         {
-            if (!ModelState.IsValid)
-                return Index();
-
-            DataStore.Instance.Create(item);
+            DataStore.Instance.ChangeStatus(item.Id, item.Status);
             return RedirectToAction("Index");
         }
     }

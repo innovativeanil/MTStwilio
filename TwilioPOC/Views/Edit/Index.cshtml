@@ -1,0 +1,31 @@
+﻿@model TwilioPOC.Models.Feedback
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Submit Feedback</h2>
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Feedback</legend>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Id)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Status)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Status)
+        </div>
+        <br/>
+        <input type="submit" value="Save Changes" />
+        
+    </fieldset>
+}
