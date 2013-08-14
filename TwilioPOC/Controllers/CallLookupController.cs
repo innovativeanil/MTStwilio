@@ -13,6 +13,8 @@ namespace TwilioPOC.Controllers
 {
     public class CallLookupController : ApiController
     {
+        public const string URL = Constants.ControllerDirectory + "CallLookup";
+
         [HttpPost]
         public HttpResponseMessage Post(VoiceRequest request)
         {
@@ -29,7 +31,7 @@ namespace TwilioPOC.Controllers
                 response.Say(string.Format("The status of item {0} is {1}.", item.Id, item.Status));
             }
 
-            response.Redirect("http://twiliopoc.apphb.com/api/CallHome");
+            response.Redirect(CallHomeController.URL);
             
             return this.Request.CreateResponse(
                 HttpStatusCode.OK, response.Element, new XmlMediaTypeFormatter());

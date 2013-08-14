@@ -12,13 +12,16 @@ namespace TwilioPOC.Controllers
 {
     public class CallCreateController : ApiController
     {
+        public const string URL = Constants.ControllerDirectory + "CallCreate";
+
         [HttpPost]
         public HttpResponseMessage Post(VoiceRequest request)
         {
             var response = new TwilioResponse();
-            var name = (request != null) ? request.Digits : string.Empty;
+            var name = (request != null) ? request.TranscriptionText : "Response is null";
 
-            response.Say("You are a little bitch, bitch.");
+            response.Say(string.Format("You said {0} right? Good.", name));
+            response.Redirect(CallHomeController.URL);
 
             return this.Request.CreateResponse(
                 HttpStatusCode.OK, response.Element, new XmlMediaTypeFormatter());
