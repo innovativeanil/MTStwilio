@@ -21,8 +21,8 @@ namespace TwilioPOC.Controllers
         public HttpResponseMessage Post(VoiceRequest request)
         {
             var response = new TwilioResponse();
-            var transc = (request != null) ? request.TranscriptionText : "Request is null";
-            var record = (request != null) ? request.RecordingUrl : "Request is null";
+            var transcrib = (request != null) ? request.TranscriptionText : "Request is null";
+            var recording = (request != null) ? request.RecordingUrl : "Request is null";
             
             if (request != null)
             {
@@ -31,11 +31,19 @@ namespace TwilioPOC.Controllers
                 string AuthToken = "{{ auth_token }}";
                 var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
-                var number = twilio.GetIncomingPhoneNumber(request.CallSid);
+                var number1 = twilio.GetIncomingPhoneNumber(request.CallSid);
+                var number2 = twilio.GetIncomingPhoneNumber(request.DialCallSid);
 
-                DataStore.Instance.Create(new Feedback { Submitter = "Twilio", Phone = number.PhoneNumber, Message = record });
+                var id = DataStore.Instance.Create(
+                    new Feedback
+                        {
+                            Submitter = "Twilio", 
+                            Phone = string.Format("{0} [{1}], {2} [{3}]", request.CallSid, number1, request.DialCallSid, number2),
+                            Message = recording
+                        });
 
-                response.Say(string.Format("Thanks!"));
+                response.Say(string.Format("Thank you for your feedback. Your item number is {0}. Goodbye.", id));
+                response.Hangup();
             }
 
             response.Redirect(CallHomeController.URL);

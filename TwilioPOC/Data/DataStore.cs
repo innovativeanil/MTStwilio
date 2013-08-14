@@ -23,14 +23,14 @@ namespace TwilioPOC.Data
             dataStore = new List<Feedback>();
         }
 
-        public bool Create(Feedback item)
+        public int Create(Feedback item)
         {
             lock (lockObject)
             {
                 item.Id = dataStore.Count + 1;
                 item.Status = "Open";
                 dataStore.Add(item);
-                return true;
+                return item.Id;
             }
         }
 
