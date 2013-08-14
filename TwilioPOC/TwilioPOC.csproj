@@ -142,6 +142,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\CallHomeController.cs" />
+    <Compile Include="Controllers\RoutingController.cs" />
     <Compile Include="Data\DataStore.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
