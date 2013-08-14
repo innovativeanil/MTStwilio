@@ -39,6 +39,7 @@
             dataTable.addColumn('string', 'Submitter');
             dataTable.addColumn('string', 'Phone');
             dataTable.addColumn('string', 'Message');
+            dataTable.addColumn('string', 'Status');
 
             // Set up the data-table data
             for (var i = 0; i < data.length; i++) {
@@ -47,7 +48,8 @@
                     data[i].Id,
                     data[i].Submitter,
                     data[i].Phone,
-                    data[i].Message]);
+                    data[i].Message,
+                    data[i].Status]);
             }
 
             // Make the table
