@@ -31,14 +31,13 @@ namespace TwilioPOC.Controllers
                 string AuthToken = "{{ auth_token }}";
                 var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
-                var number1 = twilio.GetIncomingPhoneNumber(request.CallSid);
-                var number2 = twilio.GetIncomingPhoneNumber(request.DialCallSid);
+                var number1 = twilio.GetIncomingPhoneNumber(request.CallSid).PhoneNumber;
 
                 var id = DataStore.Instance.Create(
                     new Feedback
                         {
                             Submitter = "Twilio", 
-                            Phone = string.Format("{0} [{1}], {2} [{3}]", request.CallSid, number1, request.DialCallSid, number2),
+                            Phone = string.Format("{0} [{1}]", request.CallSid, number1),
                             Message = recording
                         });
 
