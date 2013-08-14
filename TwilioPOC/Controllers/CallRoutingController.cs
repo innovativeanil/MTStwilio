@@ -16,7 +16,7 @@ namespace TwilioPOC.Controllers
         public HttpResponseMessage Post(VoiceRequest request)
         {
             var response = new TwilioResponse();
-            var option = request.Digits;
+            var option = (request != null) ? request.Digits : string.Empty;
 
             switch(option)
             {

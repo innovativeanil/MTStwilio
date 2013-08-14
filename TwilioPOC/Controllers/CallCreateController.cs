@@ -16,7 +16,7 @@ namespace TwilioPOC.Controllers
         public HttpResponseMessage Post(VoiceRequest request)
         {
             var response = new TwilioResponse();
-            var Name = request.Digits;
+            var name = (request != null) ? request.Digits : string.Empty;
 
             response.Say("You are a little bitch, bitch.");
 
