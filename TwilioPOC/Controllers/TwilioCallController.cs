@@ -18,7 +18,7 @@ namespace TwilioPOC.Controllers
             var response = new TwilioResponse();
 
             response.Say("Welcome to this Twilio demo app. Please enter your 5 digit ID.");
-            response.Gather(new { numDigits = 5, action = string.Format("/api/Authenticate") });
+            //response.Gather(new { numDigits = 5, action = string.Format("/api/Authenticate") });
 
             return this.Request.CreateResponse(
                 HttpStatusCode.OK, response.Element, new XmlMediaTypeFormatter());
