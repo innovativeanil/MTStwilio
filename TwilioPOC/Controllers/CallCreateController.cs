@@ -7,6 +7,8 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 using Twilio.Mvc;
 using Twilio.TwiML;
+using TwilioPOC.Data;
+using TwilioPOC.Models;
 
 namespace TwilioPOC.Controllers
 {
@@ -18,9 +20,16 @@ namespace TwilioPOC.Controllers
         public HttpResponseMessage Post(VoiceRequest request)
         {
             var response = new TwilioResponse();
-            var name = (request != null) ? request.TranscriptionText : "Response is null";
+            var transc = (request != null) ? request.TranscriptionText : "Request is null";
+            var record = (request != null) ? request.RecordingUrl : "Request is null";
 
-            response.Say(string.Format("You said {0} right? Good.", name));
+            if (request != null)
+            {
+                DataStore.Instance.Create(new Feedback { Submitter = "Twilio", Phone = request.DialCallSid, Status = transc, Message = record });
+
+                response.Say(string.Format("Thanks!"));
+            }
+
             response.Redirect(CallHomeController.URL);
 
             return this.Request.CreateResponse(
