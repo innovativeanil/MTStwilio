@@ -7,10 +7,30 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    @RenderBody()
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <img src="http://www.fcpablog.com/storage/www.google.com%202012-5-20%20142628.png?__SQUARESPACE_CACHEVERSION=1368015162201" width="50" height="40" alt="MTS Logo" />
+                </div>
+                <div class="float-right">
+                    @*<section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>*@
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Submit", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Review","Index", "Review")</li>
+                            @*<li>@Html.ActionLink("Contact Us", "Index", "Contact")</li>*@
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
 
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
-</body>
+        @RenderBody()
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
 </html>

@@ -1,8 +1,45 @@
-﻿@{
+﻿@model TwilioPOC.Models.Feedback
+
+@{
     ViewBag.Title = "Index";
 }
 
-<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-    <Say>Hello Monkey</Say>
-</Response>
+<h2>Submit Feedback</h2>
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Feedback</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Submitter)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Submitter)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Phone)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Phone)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Message)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Message)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Status)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Status)
+        </div>
+        <br/>
+        <input type="submit" value="Create New Product" />
+        
+    </fieldset>
+}

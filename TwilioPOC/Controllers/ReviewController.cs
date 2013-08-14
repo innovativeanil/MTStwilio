@@ -4,11 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TwilioPOC.Data;
-using TwilioPOC.Models;
 
 namespace TwilioPOC.Controllers
 {
-    public class HomeController : Controller
+    public class ReviewController : Controller
     {
         [HttpGet]
         public ActionResult Index()
@@ -16,15 +15,11 @@ namespace TwilioPOC.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Index(Feedback item)
+        [HttpGet]
+        public JsonResult GetFeedbackItems()
         {
-            if (!ModelState.IsValid)
-                return Index();
-
-            DataStore.Instance.Save(item);
-            return RedirectToAction("Index");
+            var items = DataStore.Instance.GetItems();
+            return Json(items, JsonRequestBehavior.AllowGet);
         }
-
     }
 }

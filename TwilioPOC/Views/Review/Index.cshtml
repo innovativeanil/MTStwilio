@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@section scripts
+{
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+    <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+
+    <script type="text/javascript">
+        google.load('visualization', '1', { packages: ['table'] });
+
+        $(document).ready(function() {
+            DrawFeedbackItems();
+            drawTable();
+        });
+
+        function DrawFeedbackItems() {
+            $.ajax({
+                type: 'GET',
+                url: 'Review/GetFeedbackItems',
+                data: { },
+                dataType: 'json',
+                success: function(data) {
+                    drawTable(data);
+                },
+                error: function() {
+                    alert('Error getting feedback items.');
+                }
+            });
+        }
+
+        function drawTable(data) {
+
+            // Set up the data-table metadata
+            var dataTable = new window.google.visualization.DataTable();
+            dataTable.addColumn('number', 'Id');
+            dataTable.addColumn('string', 'Submitter');
+            dataTable.addColumn('string', 'Phone');
+            dataTable.addColumn('string', 'Message');
+
+            // Set up the data-table data
+            for (var i = 0; i < data.length; i++) {
+
+                dataTable.addRow([
+                    data[i].Id,
+                    data[i].Submitter,
+                    data[i].Phone,
+                    data[i].Message]);
+            }
+
+            // Make the table
+            var table = new google.visualization.Table(document.getElementById('table'));
+
+            var options = { };
+            options['showRowNumber'] = false;
+            options['alternatingRowStyle'] = true;
+            options['page'] = 'enable';
+            options['allowHtml'] = true;
+            options['sort'] = 'enable';
+            options['width'] = 'automatic';
+            options['pageSize'] = 15;
+            options['pagingButtonsConfiguration'] = 'auto';
+            options['cssClassNames'] = { headerRow: 'bigAndBoldClass' };
+
+            table.draw(dataTable, options);
+        }
+    </script>
+}
+
+<h2>Feedback Items</h2>
+
+<div id='table'></div>
