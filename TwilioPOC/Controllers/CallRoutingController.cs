@@ -23,7 +23,7 @@ namespace TwilioPOC.Controllers
             switch(option)
             {
                 case "1":
-                    response.Say("Please say your name followed by pound.");
+                    response.Say("Please say your name and provide your feedback. Press the pound key when you are finished.");
                     response.Record(new { playBeep = "true", transcribe = "true", finishOnKey = "#", action = CallCreateController.URL });
                     break;
                 case "2":

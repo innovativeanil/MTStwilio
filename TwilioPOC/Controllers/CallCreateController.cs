@@ -25,7 +25,7 @@ namespace TwilioPOC.Controllers
 
             if (request != null)
             {
-                DataStore.Instance.Create(new Feedback { Submitter = "Twilio", Phone = request.DialCallSid, Status = transc, Message = record });
+                DataStore.Instance.Create(new Feedback { Submitter = "Twilio", Phone = request.CallerName, Message = record });
 
                 response.Say(string.Format("Thanks!"));
             }
