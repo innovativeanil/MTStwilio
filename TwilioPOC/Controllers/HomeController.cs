@@ -23,7 +23,7 @@ namespace TwilioPOC.Controllers
                 return Index();
 
             DataStore.Instance.Create(item);
-            return RedirectToAction("Index");
+            return Redirect("Review");
         }
     }
 }
