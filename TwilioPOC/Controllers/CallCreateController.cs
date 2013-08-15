@@ -31,7 +31,7 @@ namespace TwilioPOC.Controllers
                     new Feedback
                         {
                             Submitter = "Twilio", 
-                            Phone = string.Format("SID:{0}, #:{1}", number.Sid, number.PhoneNumber),
+                            Phone = string.Format("SID:{0}, #:{1}", request.CallSid, number),
                             Message = recording
                         });
 

@@ -8,12 +8,14 @@ namespace TwilioPOC
 {
     public class TwilioHelper
     {
-        public static IncomingPhoneNumber GetNumber(string sid)
+        public static string GetNumber(string sid)
         {
             // find the number
             //string AuthToken = "{{ " + Constants.TwilioToken + " }}";
             var twilio = new TwilioRestClient(Constants.TwilioSid, Constants.TwilioToken);
-            return twilio.GetIncomingPhoneNumber(sid);
+            var call = twilio.GetCall(sid);
+            return call.From;
+            //return twilio.GetIncomingPhoneNumber(sid);
         }
 
         public static bool SendText(string number, string message)
