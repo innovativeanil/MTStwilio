@@ -30,6 +30,11 @@ namespace TwilioPOC.Data
                 item.Id = dataStore.Count + 1;
                 item.Status = "Open";
                 dataStore.Add(item);
+
+                // Send id to customer
+                TwilioHelper.SendText(item.Phone,
+                    string.Format("A new MTS Feedback Item (#{0}) has been created. Thank you for your feedback.", item.Id));
+
                 return item.Id;
             }
         }
@@ -48,10 +53,11 @@ namespace TwilioPOC.Data
 
                 // update the item
                 match.Status = status;
-
+                
                 // Notify submitter via text
-                TwilioHelper.SendText("507-304-1050", 
-                    string.Format("The status of MTS Feedback Item #{0} has been updated to {1}.", id, status));
+                var item = GetItem(id);
+                TwilioHelper.SendText(item.Phone, 
+                    string.Format("The status of MTS Feedback Item #{0} has been updated to '{1}.'", id, status));
                 
                 return true;
             }
