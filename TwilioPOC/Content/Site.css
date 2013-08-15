@@ -9,6 +9,54 @@ header, footer, nav, section {
     display: block;
 }
 
+/* Custom divs */
+.main-content {
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.header-content {
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.logo {
+    float: left;
+}
+
+.nav-panel {
+    background-color: gray;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    height: 40px;
+}
+
+.nav-panel li {
+    margin-left: 10px;
+    display: inline;
+}
+
+.nav-panel a {
+    font-size: 1.5em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    /*color: #232323;*/
+    color: white;
+    text-decoration: none;
+}
+
+.nav-panel a:hover {
+    font-size: 1.5em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    color: lightcoral;
+    text-decoration: none;
+}
+
+.tableHeaderClass {
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-align: center;
+}
 
 /* Styles for basic forms
 -----------------------------------------------------------*/
@@ -16,6 +64,7 @@ fieldset {
     border: 1px solid #ddd;
     padding: 0 1.4em 1.4em 1.4em;
     margin: 0 0 1.5em 0;
+    width: 200px;
 }
 
 legend {
