@@ -2,7 +2,7 @@
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     color: #232323;
-    background-color: #fff;
+    background-color: whitesmoke;
 }
 
 header, footer, nav, section {
@@ -55,7 +55,13 @@ header, footer, nav, section {
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     font-weight: bold;
     font-size: 1.1em;
-    text-align: center;
+    text-align: left;
+    color: white;
+}
+
+.tableHeaderCell {
+    background-color: gray;
+
 }
 
 /* Styles for basic forms
@@ -65,6 +71,9 @@ fieldset {
     padding: 0 1.4em 1.4em 1.4em;
     margin: 0 0 1.5em 0;
     width: 200px;
+    background-color: rgba(255, 255, 255, 0.73);
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 1px darkgray;
 }
 
 legend {
@@ -72,11 +81,23 @@ legend {
     font-weight: bold;
 }
 
+input {
+    border-radius: 2px;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+}
+
+input[type="submit"] {
+    font-weight: bold;
+    background-color: white;
+    padding: 3px 30px 3px 30px;
+}
+
 textarea {
     min-height: 75px;
 }
 
 .editor-label {
+    font-weight: bold;
     margin: 1em 0 0 0;
 }
 
