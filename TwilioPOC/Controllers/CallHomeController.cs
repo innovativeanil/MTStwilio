@@ -20,7 +20,9 @@ namespace TwilioPOC.Controllers
         {
             var response = new TwilioResponse();
 
-            response.Say("Welcome to the MTS mobile feedback reporting system.  Press 1 to enter feedback. Press 2 to look up an item.");
+            response.Say("Welcome to the MTS mobile feedback reporting system.");
+            response.Say("Press 1 to enter feedback.");
+            response.Say("Press 2 to look up an item.");
             response.Gather(new { numDigits = 1, action = CallRoutingController.URL });
 
             return this.Request.CreateResponse(

@@ -19,9 +19,9 @@ namespace TwilioPOC.Controllers
         public HttpResponseMessage Post(VoiceRequest request)
         {
             var response = new TwilioResponse();
-            var option = (request != null) ? request.Digits : string.Empty;
+            var id = (request != null) ? request.Digits : string.Empty;
 
-            var item = DataStore.Instance.GetItem(option);
+            var item = DataStore.Instance.GetItem(id);
 
             if (item == null)
             {

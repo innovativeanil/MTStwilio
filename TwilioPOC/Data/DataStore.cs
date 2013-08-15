@@ -49,8 +49,10 @@ namespace TwilioPOC.Data
                 // update the item
                 match.Status = status;
 
-                // TODO: Notify submitter via text
-
+                // Notify submitter via text
+                TwilioHelper.SendText("507-304-1050", 
+                    string.Format("The status of MTS Feedback Item #{0} has been updated to {1}.", id, status));
+                
                 return true;
             }
         }

@@ -26,22 +26,17 @@ namespace TwilioPOC.Controllers
             
             if (request != null)
             {
-                // find the number
-                string AccountSid = "AC13f02fa06d1853607c7b7a271a973e17";
-                string AuthToken = "{{ auth_token }}";
-                var twilio = new TwilioRestClient(AccountSid, AuthToken);
-
-                var number1 = twilio.GetIncomingPhoneNumber(request.CallSid).PhoneNumber;
-
+                var number = TwilioHelper.GetNumber(request.CallSid);
                 var id = DataStore.Instance.Create(
                     new Feedback
                         {
                             Submitter = "Twilio", 
-                            Phone = string.Format("{0} [{1}]", request.CallSid, number1),
+                            Phone = string.Format("SID:{0}, #:{1}", number.Sid, number.PhoneNumber),
                             Message = recording
                         });
 
-                response.Say(string.Format("Thank you for your feedback. Your item number is {0}. Goodbye.", id));
+                response.Say("Thank you for your feedback.");
+                response.Say(string.Format("Your item number is {0}. Goodbye.", id));
                 response.Hangup();
             }
 
